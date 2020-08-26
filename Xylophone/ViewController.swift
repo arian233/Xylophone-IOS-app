@@ -1,13 +1,10 @@
-//
-//  ViewController.swift
-//  Xylophone
-//
-//  Created by Angela Yu on 28/06/2019.
-//  Copyright © 2019 The App Brewery. All rights reserved.
-//
+/* Arian Ansari
+ This is a simple Xylophone IOS application */
+
 
 import UIKit
-
+import AVFoundation
+var player : AVAudioPlayer!
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -16,6 +13,21 @@ class ViewController: UIViewController {
 
 
     
-
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        playSound(char: sender.currentTitle!)
+    }
+    
+    func playSound(char : String){
+        if let path = Bundle.main.path(forResource: char, ofType: "wav"){
+            do{
+                player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+                player.play()
+            }catch{
+                print(error.localizedDescription)
+            }
+            
+        }
+        
+    }
 }
 
